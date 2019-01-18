@@ -43,6 +43,7 @@ ARG RESTY_CONFIG_OPTIONS="\
     --with-stream \
     --with-stream_ssl_module \
     --with-threads \
+    --add-module=/tmp/nginx_upload_module-2.2.0 \
     "
 ARG RESTY_CONFIG_OPTIONS_MORE=""
 ARG RESTY_ADD_PACKAGE_BUILDDEPS=""
@@ -94,6 +95,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && tar xzf openssl-${RESTY_OPENSSL_VERSION}.tar.gz \
     && curl -fSL https://ftp.pcre.org/pub/pcre/pcre-${RESTY_PCRE_VERSION}.tar.gz -o pcre-${RESTY_PCRE_VERSION}.tar.gz \
     && tar xzf pcre-${RESTY_PCRE_VERSION}.tar.gz \
+    && curl -fSL http://www.grid.net.ru/nginx/download/nginx_upload_module-2.2.0.tar.gz -o nginx_upload_module.tar.gz \
+    && tar xzf nginx_upload_module.tar.gz \
     && curl -fSL https://openresty.org/download/openresty-${RESTY_VERSION}.tar.gz -o openresty-${RESTY_VERSION}.tar.gz \
     && tar xzf openresty-${RESTY_VERSION}.tar.gz \
     && cd /tmp/openresty-${RESTY_VERSION} \
